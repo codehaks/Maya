@@ -1,0 +1,14 @@
+﻿@page
+@model MyApp.Pages.Movies.EditModel
+@{
+}
+
+<form method="post" class="form">
+    <h2>Edit Movie</h2>
+    <input asp-for="Id" hidden/>
+
+    <input asp-for="Name" class="form-control m-2" placeholder="Name" />
+    <input asp-for="Year" class="form-control  m-2" placeholder="Year" />
+
+    <button class="btn btn-primary">Submit</button>
+</form>
