@@ -1,0 +1,14 @@
+﻿@page
+@model MyApp.Pages.Movies.DeleteModel
+@{
+}
+
+<form method="post" class="form">
+    <h2>Delete Movie</h2>
+    <input asp-for="Id" hidden/>
+
+    <input asp-for="Name" class="form-control m-2" placeholder="Name" disabled />
+    <input asp-for="Year" class="form-control  m-2" placeholder="Year" disabled/>
+
+    <button class="btn btn-danger">Submit</button>
+</form>
