@@ -5,6 +5,9 @@
 
 <form method="post" class="form">
     <h2>Add New Movie</h2>
+
+    <div asp-validation-summary="All"></div>
+
     <input asp-for="Name" class="form-control m-2" placeholder="Name" />
     <input asp-for="Year" class="form-control  m-2" placeholder="Year" />
     <button class="btn btn-primary">Submit</button>
