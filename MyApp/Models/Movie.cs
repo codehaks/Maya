@@ -53,5 +53,7 @@ namespace MyApp.Models
 
         [MaxLength(1000)]
         public string Description { get; set; }
+
+        public bool IsWatched { get; set; }
     }
 }

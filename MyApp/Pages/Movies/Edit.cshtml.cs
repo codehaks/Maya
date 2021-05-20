@@ -16,9 +16,16 @@ namespace MyApp.Pages.Movies
         public int Id { get; set; }
 
         [BindProperty]
+        public bool IsWatched { get; set; }
+
+        [BindProperty]
         [Required(ErrorMessage = "Name is needed!")]
         [StringLength(maximumLength: 50, MinimumLength = 2, ErrorMessage = "Length must be between {1} and {2}")]
         public string Name { get; set; }
+
+        [BindProperty]
+        [StringLength(maximumLength: 1000, MinimumLength = 0, ErrorMessage = "Length must be between {1} and {2}")]
+        public string Description { get; set; }
 
         [BindProperty]
         [Required(ErrorMessage = "Movie must have a year!")]
@@ -44,6 +51,8 @@ namespace MyApp.Pages.Movies
             Name= movie.Name;
             Year = movie.Year;
             Score = movie.Score;
+            IsWatched = movie.IsWatched;
+            Description = movie.Description;
         }
 
         public IActionResult OnPost()
@@ -54,9 +63,12 @@ namespace MyApp.Pages.Movies
             }
             var movie = new Movie
             {
+                Id=Id,
                 Name = Name,
                 Year = Year.Value,
-                Score = Score
+                Score = Score,
+                Description=Description,
+                IsWatched=IsWatched
             };
 
             _db.Movies.Update(movie);

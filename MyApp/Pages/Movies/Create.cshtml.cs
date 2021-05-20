@@ -15,6 +15,9 @@ namespace MyApp.Pages.Movies
     public class CreateModel : PageModel
     {
         [BindProperty]
+        public bool IsWatched { get; set; }
+
+        [BindProperty]
         [Required(ErrorMessage = "Name is needed!")]
         [StringLength(maximumLength: 50, MinimumLength = 2, ErrorMessage = "Length must be between {1} and {2}")]
         public string Name { get; set; }
@@ -50,7 +53,8 @@ namespace MyApp.Pages.Movies
                 Name = Name,
                 Year = Year.Value,
                 Score = Score,
-                Description=Description
+                Description=Description,
+                IsWatched=IsWatched
             };
 
             _db.Movies.Add(movie);

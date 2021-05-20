@@ -10,6 +10,7 @@
         <th>Name</th>
         <th>Year</th>
         <th>Score</th>
+        <th>Watched</th>
         <th></th>
     </tr>
 
@@ -19,6 +20,7 @@
             <td>@movie.Name</td>
             <td>@movie.Year</td>
             <td>@movie.Score</td>
+            <td>@movie.IsWatched</td>
             <td>
 
                 <a class="btn btn-info" asp-page="/movies/edit" asp-route-movieId="@movie.Id" role="button">Edit</a>
