@@ -57,7 +57,7 @@ namespace MyApp.Pages.Movies
             {
                 Name = Name,
                 Year = Year.Value,
-                Score = Score
+                Score = (int)Score
             };
 
             _db.Movies.Add(movie);
