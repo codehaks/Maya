@@ -16,6 +16,9 @@ namespace MyApp.Pages.Movies
         public int Id { get; set; }
 
         [BindProperty]
+        public string Language { get; set; }
+
+        [BindProperty]
         public bool IsWatched { get; set; }
 
         [BindProperty]
@@ -53,6 +56,7 @@ namespace MyApp.Pages.Movies
             Score = movie.Score;
             IsWatched = movie.IsWatched;
             Description = movie.Description;
+            Language = movie.Language;
         }
 
         public IActionResult OnPost()
@@ -68,7 +72,8 @@ namespace MyApp.Pages.Movies
                 Year = Year.Value,
                 Score = Score,
                 Description=Description,
-                IsWatched=IsWatched
+                IsWatched=IsWatched,
+                Language=Language
             };
 
             _db.Movies.Update(movie);

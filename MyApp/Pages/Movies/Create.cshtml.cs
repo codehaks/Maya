@@ -18,6 +18,9 @@ namespace MyApp.Pages.Movies
         public bool IsWatched { get; set; }
 
         [BindProperty]
+        public string Language { get; set; }
+
+        [BindProperty]
         [Required(ErrorMessage = "Name is needed!")]
         [StringLength(maximumLength: 50, MinimumLength = 2, ErrorMessage = "Length must be between {1} and {2}")]
         public string Name { get; set; }
@@ -54,7 +57,8 @@ namespace MyApp.Pages.Movies
                 Year = Year.Value,
                 Score = Score,
                 Description=Description,
-                IsWatched=IsWatched
+                IsWatched=IsWatched,
+                Language=Language
             };
 
             _db.Movies.Add(movie);

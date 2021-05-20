@@ -55,5 +55,7 @@ namespace MyApp.Models
         public string Description { get; set; }
 
         public bool IsWatched { get; set; }
+
+        public string Language { get; set; }
     }
 }

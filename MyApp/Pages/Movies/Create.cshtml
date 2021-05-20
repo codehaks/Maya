@@ -13,6 +13,15 @@
     </div>
 
      <div class="form-group">
+        <label asp-for="Language"></label>
+        <br />
+        <input asp-for="Language" type="radio" class="form-control-radio" value="English" checked /> English<br />
+        <input asp-for="Language" type="radio" class="form-control-radio" value="French" /> French<br />
+        <input asp-for="Language" type="radio" class="form-control-radio" value="Spanish" /> Spanish<br />
+        
+    </div>
+
+     <div class="form-group">
         <label asp-for="Description"></label>
         <textarea asp-for="Description" class="form-control" ></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
