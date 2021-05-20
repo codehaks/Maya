@@ -42,10 +42,16 @@ namespace MyApp.Models
     public class Movie
     {
         public int Id { get; set; }
+
+        [MaxLength(50)]
         public string Name { get; set; }
+
         public int Year { get; set; }
 
         [Range(1,10)]
         public ScoreValue? Score { get; set; }
+
+        [MaxLength(1000)]
+        public string Description { get; set; }
     }
 }

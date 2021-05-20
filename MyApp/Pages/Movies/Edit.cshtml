@@ -7,8 +7,32 @@
     <h2>Edit Movie</h2>
     <input asp-for="Id" hidden/>
 
-    <input asp-for="Name" class="form-control m-2" placeholder="Name" />
-    <input asp-for="Year" class="form-control  m-2" placeholder="Year" />
+  
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Year"></label>
+        <input asp-for="Year" class="form-control" />
+        <span asp-validation-for="Year" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Score"></label>
+        <select asp-for="Score"
+                asp-items="Html.GetEnumSelectList<MyApp.Models.ScoreValue>()" class="form-control">
+                <option value="">Not rated</option>
+        </select>
+        <span asp-validation-for="Score" class="text-danger"></span>
+    </div>
 
     <button class="btn btn-primary">Submit</button>
 </form>
+
+@section scripts{
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+}

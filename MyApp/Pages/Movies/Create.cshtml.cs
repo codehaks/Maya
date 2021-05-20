@@ -20,6 +20,10 @@ namespace MyApp.Pages.Movies
         public string Name { get; set; }
 
         [BindProperty]
+        [StringLength(maximumLength: 1000, MinimumLength = 0, ErrorMessage = "Length must be between {1} and {2}")]
+        public string Description { get; set; }
+
+        [BindProperty]
         [Required(ErrorMessage = "Movie must have a year!")]
         [Range(1950, 2021, ErrorMessage = "Year starts with {1} to {2}")]
         public int? Year { get; set; }
@@ -45,7 +49,8 @@ namespace MyApp.Pages.Movies
             {
                 Name = Name,
                 Year = Year.Value,
-                Score = Score
+                Score = Score,
+                Description=Description
             };
 
             _db.Movies.Add(movie);
