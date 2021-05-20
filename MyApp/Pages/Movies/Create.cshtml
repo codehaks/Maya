@@ -17,6 +17,13 @@
         <input asp-for="Year" class="form-control" />
         <span asp-validation-for="Year" class="text-danger"></span>
     </div>
+    <div class="form-group">
+        <label asp-for="Score"></label>
+        <select asp-for="Score"
+                asp-items="Html.GetEnumSelectList<MyApp.Pages.Movies.ScoreValue>()" class="form-control">
+        </select>
+        <span asp-validation-for="Score" class="text-danger"></span>
+    </div>
 
     <button class="btn btn-primary">Submit</button>
 </form>

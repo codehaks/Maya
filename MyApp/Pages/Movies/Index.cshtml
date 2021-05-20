@@ -9,21 +9,23 @@
     <tr>
         <th>Name</th>
         <th>Year</th>
+        <th>Score</th>
         <th></th>
     </tr>
 
-    @foreach(var movie in Model.MovieList)
+    @foreach (var movie in Model.MovieList)
     {
-   <tr>
-       <td>@movie.Name</td>
-       <td>@movie.Year</td>
-        <td>
-            
-            <a class="btn btn-info" asp-page="/movies/edit" asp-route-movieId="@movie.Id" role="button">Edit</a>
-            <a class="btn btn-danger" asp-page="/movies/delete" asp-route-movieId="@movie.Id" role="button">Delete</a>
-            <a class="btn btn-success" asp-page="/movies/details" asp-route-movieId="@movie.Id" role="button">Details</a>
-        </td>
-   </tr>
-   }
+        <tr>
+            <td>@movie.Name</td>
+            <td>@movie.Year</td>
+            <td>@movie.Score</td>
+            <td>
+
+                <a class="btn btn-info" asp-page="/movies/edit" asp-route-movieId="@movie.Id" role="button">Edit</a>
+                <a class="btn btn-danger" asp-page="/movies/delete" asp-route-movieId="@movie.Id" role="button">Delete</a>
+                <a class="btn btn-success" asp-page="/movies/details" asp-route-movieId="@movie.Id" role="button">Details</a>
+            </td>
+        </tr>
+    }
 
 </table>
