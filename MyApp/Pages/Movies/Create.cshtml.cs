@@ -11,19 +11,7 @@ using MyApp.Models;
 
 namespace MyApp.Pages.Movies
 {
-    public enum ScoreValue
-    {
-        One = 1,
-        Two = 2,
-        Three = 3,
-        Four = 4,
-        Five = 5,
-        Six = 6,
-        Seven = 7,
-        Eight = 8,
-        Nine = 9,
-        Ten = 10
-    }
+
     public class CreateModel : PageModel
     {
         [BindProperty]
@@ -38,7 +26,7 @@ namespace MyApp.Pages.Movies
 
         [BindProperty]
         [Range(1, 10)]
-        public ScoreValue Score { get; set; }
+        public ScoreValue? Score { get; set; }
 
         private readonly AppDbContext _db;
 
@@ -57,7 +45,7 @@ namespace MyApp.Pages.Movies
             {
                 Name = Name,
                 Year = Year.Value,
-                Score = (int)Score
+                Score = Score
             };
 
             _db.Movies.Add(movie);

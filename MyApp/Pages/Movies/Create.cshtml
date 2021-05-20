@@ -20,7 +20,8 @@
     <div class="form-group">
         <label asp-for="Score"></label>
         <select asp-for="Score"
-                asp-items="Html.GetEnumSelectList<MyApp.Pages.Movies.ScoreValue>()" class="form-control">
+                asp-items="Html.GetEnumSelectList<MyApp.Models.ScoreValue>()" class="form-control">
+                <option value="">Not rated</option>
         </select>
         <span asp-validation-for="Score" class="text-danger"></span>
     </div>
