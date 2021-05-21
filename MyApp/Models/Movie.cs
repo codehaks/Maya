@@ -57,5 +57,7 @@ namespace MyApp.Models
         public bool IsWatched { get; set; }
 
         public string Language { get; set; }
+
+        public byte[] PosterData { get; set; }
     }
 }

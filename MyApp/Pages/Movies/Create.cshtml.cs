@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyApp.Data;
@@ -14,6 +15,9 @@ namespace MyApp.Pages.Movies
 
     public class CreateModel : PageModel
     {
+        [BindProperty]
+        public IFormFile PosterFile { get; set; }
+
         [BindProperty]
         public bool IsWatched { get; set; }
 
@@ -45,12 +49,13 @@ namespace MyApp.Pages.Movies
             _db = db;
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             if (ModelState.IsValid == false)
             {
                 return Page();
-            }
+            }           
+
             var movie = new Movie
             {
                 Name = Name,
@@ -60,6 +65,13 @@ namespace MyApp.Pages.Movies
                 IsWatched=IsWatched,
                 Language=Language
             };
+
+            if (PosterFile is not null && PosterFile.Length>0)
+            {
+                using var memory = new MemoryStream();
+                await PosterFile.CopyToAsync(memory);
+                movie.PosterData = memory.ToArray();
+            }
 
             _db.Movies.Add(movie);
 
