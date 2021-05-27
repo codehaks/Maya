@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MyApp.Data;
 using MyApp.Models;
 
@@ -12,8 +13,13 @@ namespace MyApp.Pages.Movies
 {
     public class EditModel : PageModel
     {
+        public SelectList GenreList { get; set; }
+
         [BindProperty]
         public int Id { get; set; }
+
+        [BindProperty]
+        public int GenreId { get; set; }
 
         [BindProperty]
         public string Language { get; set; }
@@ -57,6 +63,11 @@ namespace MyApp.Pages.Movies
             IsWatched = movie.IsWatched;
             Description = movie.Description;
             Language = movie.Language;
+            GenreId = movie.GenreId;
+
+            var genres = _db.Genres.ToList();
+
+            GenreList = new SelectList(genres, "Id", "Name");
         }
 
         public IActionResult OnPost()
@@ -73,7 +84,8 @@ namespace MyApp.Pages.Movies
                 Score = Score,
                 Description=Description,
                 IsWatched=IsWatched,
-                Language=Language
+                Language=Language,
+                GenreId=GenreId
             };
 
             _db.Movies.Update(movie);
