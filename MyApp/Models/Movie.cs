@@ -63,6 +63,5 @@ namespace MyApp.Models
         public int GenreId { get; set; }
         public Genre Genre { get; set; }
 
-        public IList<Actor> Cast { get; set; }
     }
 }
