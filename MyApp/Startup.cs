@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using MyApp.Data;
 using System;
 
@@ -23,7 +24,7 @@ namespace MyApp
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlite("Data Source=app.sqlite");
-                options.LogTo(Console.WriteLine);
+                options.LogTo(Console.WriteLine,LogLevel.Information);
             });
 
             services.AddControllers();
