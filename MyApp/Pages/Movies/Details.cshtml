@@ -3,9 +3,11 @@
 @{
 }
 
+<img src="data:image/jpg;base64,@(Convert.ToBase64String(Model.Movie.PosterData))" alt="@Model.Movie.Name" />
+
 <p>Name : @Model.Movie.Name</p>
 <p>Year : @Model.Movie.Year</p>
-<p>Year : @Model.Movie.Score</p>
+<p>Score : @Model.Movie.Score</p>
 
 <p>@Model.Movie.Description</p>
 
