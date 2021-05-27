@@ -59,5 +59,8 @@ namespace MyApp.Models
         public string Language { get; set; }
 
         public byte[] PosterData { get; set; }
+
+        public int GenreId { get; set; }
+        public Genre Genre { get; set; }
     }
 }
