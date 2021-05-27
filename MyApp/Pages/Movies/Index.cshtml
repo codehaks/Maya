@@ -11,7 +11,8 @@
         <th>Year</th>
         <th>Score</th>
         <th>Watched</th>
-             <th>Language</th>
+        <th>Language</th>
+        <th>Genre</th>
         <th></th>
     </tr>
 
@@ -22,7 +23,8 @@
             <td>@movie.Year</td>
             <td>@movie.Score</td>
             <td>@movie.IsWatched</td>
-                <td>@movie.Language</td>
+            <td>@movie.Language</td>
+            <td>@movie.Genre.Name</td>
             <td>
 
                 <a class="btn btn-info" asp-page="/movies/edit" asp-route-movieId="@movie.Id" role="button">Edit</a>
