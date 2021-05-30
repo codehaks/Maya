@@ -1,0 +1,21 @@
+﻿@page
+@model MyApp.Pages.Movies.Cast.IndexModel
+@{
+}
+
+
+<table class="table ">
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+
+    </tr>
+    @foreach (var actor in Model.CastList)
+    {
+        <tr>
+            <td>@actor.FirstName</td>
+            <td>@actor.LastName</td>
+        </tr>
+    }
+
+</table>
