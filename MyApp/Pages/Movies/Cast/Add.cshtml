@@ -1,0 +1,19 @@
+﻿@page
+@model MyApp.Pages.Movies.Cast.AddModel
+@{
+}
+
+<form method="post">
+
+    <h2>Add Cast</h2>
+
+    <div class="form-group">
+        <label asp-for="ActorId">Actor</label>
+        <select asp-for="ActorId" asp-items="Model.ActorSelectList" class="form-control">
+        </select>
+
+    </div>
+
+    <button class="btn btn-primary">Submit</button>
+
+</form>

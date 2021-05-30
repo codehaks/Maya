@@ -20,12 +20,14 @@ namespace MyApp.Pages.Movies.Cast
         }
 
         public IList<Actor> CastList { get; set; }
+        public int MovieId { get; set; }
 
         public void OnGet(int movieId)
         {
             var movie = _db.Movies.Include(m=>m.Cast).FirstOrDefault(m=>m.Id==movieId);
 
-            CastList = movie.Cast.ToList(); ;
+            CastList = movie.Cast.ToList();
+            MovieId = movieId;
         }
     }
 }
