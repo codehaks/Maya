@@ -1,0 +1,22 @@
+﻿@page
+@model MyApp.Pages.Movies.Comments.IndexModel
+@{
+}
+
+<table class="table ">
+    <tr>
+        <th>Comment</th>
+    </tr>
+    @foreach (var comment in Model.Movie.Comments)
+    {
+        <tr>
+            <td>
+
+               @comment.Body
+
+            </td>
+
+        </tr>
+    }
+
+</table>

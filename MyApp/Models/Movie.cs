@@ -39,9 +39,18 @@ namespace MyApp.Models
         Ten = 10
     }
 
+    public class Comment
+    {
+        public int Id { get; set; }
+        public string Body { get; set; }
+        public DateTime TimeCreated { get; set; }
+    }
+
     public class Movie
     {
         public int Id { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
 
         [MaxLength(50)]
         public string Name { get; set; }
