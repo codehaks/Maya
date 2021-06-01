@@ -5,8 +5,39 @@
 }
 
 <div class="jumbotron">
-    <h1 class="display-4">Maya App</h1>
-    <p class="lead">My Movies Collection!</p>
-   
-    <a class="btn btn-primary btn-lg" asp-page="/movies/index" role="button">Movie List</a>
+    <h1 class="display-4">My Movies</h1>
+
+    <form method="get">
+
+        <div class="form-group">
+            <input asp-for="Term" class="form-control" />
+
+        </div>
+
+        <button class="btn btn-primary">Search</button>
+    </form>
+
 </div>
+
+
+<table class="table ">
+    <tr>
+        <th>Name</th>
+        <th>Year</th>
+        <th>Score</th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var movie in Model.MovieList)
+    {
+        <tr>
+            <td>@movie.Name</td>
+            <td>@movie.Year</td>
+            <td>@movie.Score</td>
+
+
+        </tr>
+    }
+
+</table>
