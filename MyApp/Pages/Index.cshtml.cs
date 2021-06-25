@@ -26,7 +26,9 @@ namespace MyApp
 
         public SelectList GenreList { get; set; }
 
-        public void OnGet(string term, int score, int genreId)
+        public string OrderBy { get; set; }
+
+        public void OnGet(string term, int score, int genreId,string sortBy="",string orderBy="desc")
         {
 
             var genres = _db.Genres.ToList();
@@ -53,11 +55,29 @@ namespace MyApp
                 movieQuery = movieQuery.Where(m => m.Genre.Id == genreId);
             }
 
+            if (string.IsNullOrEmpty(sortBy)==false)
+            {
+                if (sortBy=="year")
+                {
+                    if (orderBy=="desc")
+                    {
+                        movieQuery = movieQuery.OrderByDescending(m => m.Year);
+                        OrderBy = "asc";
+                    }
+                    else
+                    {
+                        movieQuery = movieQuery.OrderBy(m => m.Year);
+                        OrderBy = "desc";
+                    }
+                    
+                }
+            }
 
 
             MovieList = movieQuery.ToList();
 
             Term = term;
+
 
 
         }

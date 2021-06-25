@@ -35,7 +35,12 @@
 <table class="table ">
     <tr>
         <th>Name</th>
-        <th>Year</th>
+        <th>
+        
+            <a asp-page="/index" asp-route-sortby="year" asp-route-orderby="@Model.OrderBy">Year</a>
+        
+        
+        </th>
         <th>Genre</th>
         <th>Score</th>
 
