@@ -71,6 +71,21 @@ namespace MyApp
                     }
                     
                 }
+
+                if (sortBy == "score")
+                {
+                    if (orderBy == "desc")
+                    {
+                        movieQuery = movieQuery.OrderByDescending(m => m.Score);
+                        OrderBy = "asc";
+                    }
+                    else
+                    {
+                        movieQuery = movieQuery.OrderBy(m => m.Score);
+                        OrderBy = "desc";
+                    }
+
+                }
             }
 
 
