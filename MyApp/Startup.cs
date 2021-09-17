@@ -23,8 +23,8 @@ namespace MyApp
         {
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlite("Data Source=app.sqlite");
-                options.LogTo(Console.WriteLine,LogLevel.Information);
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
+                options.LogTo(Console.WriteLine, LogLevel.Information);
             });
 
             services.AddControllers();
@@ -33,7 +33,6 @@ namespace MyApp
                 .AddRazorRuntimeCompilation();
 
         }
-
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

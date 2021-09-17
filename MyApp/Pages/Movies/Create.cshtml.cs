@@ -1,20 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using MyApp.Data;
+using MyApp.Models;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using MyApp.Data;
-using MyApp.Models;
 
 namespace MyApp.Pages.Movies
 {
 
     public class CreateModel : PageModel
     {
+        public SelectList GenreList { get; set; }
+        [BindProperty]
+        public int GenreId { get; set; }
         [BindProperty]
         public IFormFile PosterFile { get; set; }
 
@@ -49,24 +52,34 @@ namespace MyApp.Pages.Movies
             _db = db;
         }
 
+        public void OnGet(int movieId)
+        {
+            var movie = _db.Movies.Find(movieId);
+
+            var genres = _db.Genres.ToList();
+
+            GenreList = new SelectList(genres, "Id", "Name");
+        }
+
         public async Task<IActionResult> OnPost()
         {
             if (ModelState.IsValid == false)
             {
                 return Page();
-            }           
+            }
 
             var movie = new Movie
             {
                 Name = Name,
                 Year = Year.Value,
                 Score = Score,
-                Description=Description,
-                IsWatched=IsWatched,
-                Language=Language
+                Description = Description,
+                IsWatched = IsWatched,
+                Language = Language,
+                GenreId = GenreId
             };
 
-            if (PosterFile is not null && PosterFile.Length>0)
+            if (PosterFile is not null && PosterFile.Length > 0)
             {
                 using var memory = new MemoryStream();
                 await PosterFile.CopyToAsync(memory);
