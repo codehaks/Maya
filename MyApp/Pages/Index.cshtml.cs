@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyApp.Data;
 using MyApp.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MyApp
 {
@@ -28,72 +26,77 @@ namespace MyApp
 
         public string OrderBy { get; set; }
 
-        public void OnGet(string term, int score, int genreId,string sortBy="",string orderBy="desc")
+        public void OnGet(string term, int score, int genreId, string sortBy = "", string orderBy = "desc")
         {
-
-            var genres = _db.Genres.ToList();
-            GenreList = new SelectList(genres, "Id", "Name");
-
-            IQueryable<Movie> movieQuery;
-
-            if (string.IsNullOrEmpty(term))
+            try
             {
-                movieQuery = _db.Movies.Include(m => m.Genre);
-            }
-            else
-            {
-                movieQuery = _db.Movies.Include(m => m.Genre).Where(m => m.Name.Contains(term));
-            }
 
-            if (score > 0)
-            {
-                movieQuery = movieQuery.Where(m => m.Score != null && (int)m.Score >= score);
-            }
+                var genres = _db.Genres.ToList();
+                GenreList = new SelectList(genres, "Id", "Name");
 
-            if (genreId > 0)
-            {
-                movieQuery = movieQuery.Where(m => m.Genre.Id == genreId);
-            }
+                IQueryable<Movie> movieQuery;
 
-            if (string.IsNullOrEmpty(sortBy)==false)
-            {
-                if (sortBy=="year")
+                if (string.IsNullOrEmpty(term))
                 {
-                    if (orderBy=="desc")
-                    {
-                        movieQuery = movieQuery.OrderByDescending(m => m.Year);
-                        OrderBy = "asc";
-                    }
-                    else
-                    {
-                        movieQuery = movieQuery.OrderBy(m => m.Year);
-                        OrderBy = "desc";
-                    }
-                    
+                    movieQuery = _db.Movies.Include(m => m.Genre);
+                }
+                else
+                {
+                    movieQuery = _db.Movies.Include(m => m.Genre).Where(m => m.Name.Contains(term));
                 }
 
-                if (sortBy == "score")
+                if (score > 0)
                 {
-                    if (orderBy == "desc")
-                    {
-                        movieQuery = movieQuery.OrderByDescending(m => m.Score);
-                        OrderBy = "asc";
-                    }
-                    else
-                    {
-                        movieQuery = movieQuery.OrderBy(m => m.Score);
-                        OrderBy = "desc";
-                    }
-
+                    movieQuery = movieQuery.Where(m => m.Score != null && (int)m.Score >= score);
                 }
+
+                if (genreId > 0)
+                {
+                    movieQuery = movieQuery.Where(m => m.Genre.Id == genreId);
+                }
+
+                if (string.IsNullOrEmpty(sortBy) == false)
+                {
+                    if (sortBy == "year")
+                    {
+                        if (orderBy == "desc")
+                        {
+                            movieQuery = movieQuery.OrderByDescending(m => m.Year);
+                            OrderBy = "asc";
+                        }
+                        else
+                        {
+                            movieQuery = movieQuery.OrderBy(m => m.Year);
+                            OrderBy = "desc";
+                        }
+
+                    }
+
+                    if (sortBy == "score")
+                    {
+                        if (orderBy == "desc")
+                        {
+                            movieQuery = movieQuery.OrderByDescending(m => m.Score);
+                            OrderBy = "asc";
+                        }
+                        else
+                        {
+                            movieQuery = movieQuery.OrderBy(m => m.Score);
+                            OrderBy = "desc";
+                        }
+
+                    }
+                }
+
+                MovieList = movieQuery.ToList();
+
+                Term = term;
+
             }
-
-
-            MovieList = movieQuery.ToList();
-
-            Term = term;
-
-
+            catch (Exception)
+            {
+                MovieList = new List<Movie>();
+            }
 
         }
     }
