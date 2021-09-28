@@ -1,0 +1,33 @@
+﻿version: "3.9"
+volumes:
+  postgres-data:
+networks:
+  maya-network:
+    driver: bridge
+services:
+  db:
+    container_name: 'maya_db'
+    image: postgres
+    hostname: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "6859"
+    expose:
+      - "5730"
+    ports:
+      - "5730:5432"
+    networks:
+      - maya-network
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+  webapp:
+    container_name: 'maya_app'
+    build: .
+    ports:
+    - "8070:80"
+    networks:
+      - maya-network
+
+
+

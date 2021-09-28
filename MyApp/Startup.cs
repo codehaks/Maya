@@ -23,7 +23,10 @@ namespace MyApp
         {
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
+                var connection = Configuration.GetConnectionString("DefaultConnection");
+                options.UseNpgsql(connection);
+
+                Console.WriteLine(connection);
                 options.LogTo(Console.WriteLine, LogLevel.Information);
             });
 
